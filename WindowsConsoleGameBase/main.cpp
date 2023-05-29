@@ -1,7 +1,9 @@
-#include "ExampleGame.h"
-using namespace std;
+#include "Tetris.h"
+#include <ctime>
 
-int main() {
-	ExampleGame game;
+int main() 
+{
+	srand(time(NULL));
+	Tetris game;
 	return static_cast<int>(game.run());
 }
