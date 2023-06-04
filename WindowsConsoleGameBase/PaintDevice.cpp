@@ -90,12 +90,12 @@ void PaintDevice::clear() {
 	}
 }
 
-void PaintDevice::set_char(const Vector2& position, wchar_t c) {
+void PaintDevice::set_char(const Vector2& position, wchar_t c, WORD color) {
 	if (!m_Ready) return;
 	if (Square(Vector2(0, 0), m_Size).hit(position)) {
 		const int idx = position.x() + m_BufferSize.X * position.y();
 		m_Buffer[idx].Char.UnicodeChar = c;
-		m_Buffer[idx].Attributes = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED;
+		m_Buffer[idx].Attributes = color;
 	}
 }
 

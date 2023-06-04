@@ -5,6 +5,7 @@ void GameField::resize(size_t width, size_t height)
 	this->m_Height = height;
 	this->m_Width = width;
 	this->m_Field = vector<vector<wchar_t>>(m_Height - 2, vector<wchar_t>(m_Width - 2, 0x0387));
+	this->m_Colors = vector<vector<WORD>>(m_Height - 2, vector<WORD>(m_Width - 2, 0));
 }
 
 void GameField::render(PaintDevice& paintDevice)
@@ -41,7 +42,14 @@ void GameField::render(PaintDevice& paintDevice)
 		for (int x = 0; x < m_Field[y].size(); x++)
 		{
 			Vector2 v(x + 1, y + 1);
-			paintDevice.set_char(v, m_Field[y][x]);
+			if (m_Field[y][x] == 0x25D8)
+			{
+				paintDevice.set_char(v, m_Field[y][x], m_Colors[y][x]); 
+			}
+			else
+			{
+				paintDevice.set_char(v, m_Field[y][x]);
+			}
 		}
 	}
 
@@ -59,7 +67,7 @@ bool GameField::has_collision(const Figure& figure)
 	return false;
 }
 
-size_t GameField::merge(const Figure& figure)
+size_t GameField::merge(const Figure& figure, WORD color)
 {
 	size_t score = 0;
 
@@ -67,6 +75,7 @@ size_t GameField::merge(const Figure& figure)
 	for (const Point& point : figure.get_body())
 	{
 		m_Field[point.y + position.y - 1][point.x + position.x - 1] = 0x25D8;
+		m_Colors[point.y + position.y - 1][point.x + position.x - 1] = color;
 	}
 
 	for (size_t i = 0; i < m_Field.size(); i++)
@@ -84,9 +93,12 @@ size_t GameField::merge(const Figure& figure)
 			for (size_t j = i; j > 0; j--)
 			{
 				m_Field[j] = m_Field[j - 1];
+				m_Colors[j] = m_Colors[j - 1];
 			}
 			m_Field[0] = vector<wchar_t>(m_Width - 2, 0x0387);
+			m_Colors[0] = vector<WORD>(m_Width - 2, 0);
 		}
 	}
+
 	return score;
 }

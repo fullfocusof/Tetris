@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.h"
 #include <vector>
+#include <Windows.h>
+#include <random>
 
 using namespace std;
 
@@ -21,6 +23,7 @@ protected:
 	Point m_PositionBackup;
 
 	vector<vector<Point>> m_Body;
+	WORD m_Color;
 
 	size_t m_CurrentRotate = 0;
 	size_t m_CurrentRotateBackup = 0;
@@ -51,4 +54,7 @@ public:
 	void rotate();
 
 	vector<vector<Point>> randGen();
+
+	void randColor();
+	WORD getColor();
 };

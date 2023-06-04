@@ -3,7 +3,7 @@
 
 int main() 
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 	Tetris game;
 	return static_cast<int>(game.run());
 }

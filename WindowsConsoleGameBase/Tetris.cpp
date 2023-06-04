@@ -69,15 +69,14 @@ void Tetris::on_button_press(const int button)
 
 void Tetris::update(const int dt)
 {
-	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	m_Figure->backup();
 	m_Figure->update(dt);
 	if (m_GameField.has_collision(*m_Figure))
 	{
 		m_Figure->restore();
-		m_score += m_GameField.merge(*m_Figure);
+		m_score += m_GameField.merge(*m_Figure, m_Figure->getColor());
 		if (m_score > 999999) m_score = 999999;
-		m_GameField.merge(*m_Figure); 
+		//m_GameField.merge(*m_Figure, m_Figure->getColor());
 		m_Figure = m_NextFigure; 
 		m_Figure->set_position(Point(5,1));
 		m_NextFigure = new Figure(Point(16, 1));

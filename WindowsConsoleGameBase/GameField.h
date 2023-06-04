@@ -10,6 +10,7 @@ class GameField
 	size_t m_Width;
 	size_t m_Height;
 	vector<vector<wchar_t>> m_Field;
+	vector<vector<WORD>> m_Colors;
 
 public:
 
@@ -18,5 +19,5 @@ public:
 
 	bool has_collision(const Figure& figure);
 
-	size_t merge(const Figure& figure);
+	size_t merge(const Figure& figure, WORD color);
 };

@@ -4,6 +4,7 @@ Figure::Figure(Point position)
 {
 	this->m_Position = position;
 	this->m_Body = this->randGen();
+	this->randColor();
 }
 
 void Figure::update(double dt)
@@ -22,9 +23,8 @@ void Figure::render(PaintDevice& paintDevice)
 	for (const Point& point : m_Body[m_CurrentRotate])
 	{
 		Vector2 v(point.x + m_Position.x, point.y + m_Position.y);
-		paintDevice.set_char(v, 0x25D8);
+		paintDevice.set_char(v, 0x25D8, this->m_Color);
 	}
-
 }
 
 void Figure::move_right()
@@ -141,8 +141,16 @@ vector<vector<Point>> Figure::randGen()
 	default:
 		break;
 	}
+}
 
-	
+void Figure::randColor()
+{
+	this->m_Color = rand() % 15 + 1;
+}
+
+WORD Figure::getColor()
+{
+	return this->m_Color;
 }
 
 Point::Point(int x, int y)
