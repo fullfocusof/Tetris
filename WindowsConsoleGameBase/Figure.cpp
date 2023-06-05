@@ -4,7 +4,7 @@ Figure::Figure(Point position)
 {
 	this->m_Position = position;
 	this->m_Body = this->randGen();
-	this->randColor();
+	//this->randColor();
 }
 
 void Figure::update(double dt)
@@ -84,6 +84,7 @@ vector<vector<Point>> Figure::randGen()
 	{
 	case 0:
 	{
+		this->m_Color = FOREGROUND_BLUE | FOREGROUND_INTENSITY | FOREGROUND_INTENSITY;
 		return { { Point(1,0), Point(1,1), Point(1,2), Point(1,3) },  // I
 				 { Point(0,2), Point(1,2), Point(2,2), Point(3,2) },
 				 { Point(2,0), Point(2,1), Point(2,2), Point(2,3) },
@@ -93,6 +94,7 @@ vector<vector<Point>> Figure::randGen()
 
 	case 1:
 	{
+		this->m_Color = FOREGROUND_BLUE;
 		return { { Point(0,0), Point(0,1), Point(0,2), Point(-1,2) },  // J
 				 { Point(0,0), Point(0,1), Point(1,1), Point(2,1) }, 
 				 { Point(0,0), Point(1,0), Point(0,1), Point(0,2) }, 
@@ -102,6 +104,7 @@ vector<vector<Point>> Figure::randGen()
 	
 	case 2:
 	{
+		this->m_Color = FOREGROUND_BLUE | FOREGROUND_RED;
 		return { { Point(0,0), Point(1,0), Point(2,0), Point(1,1) },  // T
 				 { Point(1,0), Point(1,1), Point(1,2), Point(0,1) },
 				 { Point(0,1), Point(1,1), Point(2,1), Point(1,0) },
@@ -111,6 +114,7 @@ vector<vector<Point>> Figure::randGen()
 
 	case 3:
 	{
+		this->m_Color = FOREGROUND_GREEN | FOREGROUND_RED;
 		return { { Point(0,0), Point(0,1), Point(0,2), Point(1,2) },  // L
 				 { Point(0,0), Point(1,0), Point(2,0), Point(0,1) },
 				 { Point(0,0), Point(1,0), Point(1,1), Point(1,2) },
@@ -120,12 +124,14 @@ vector<vector<Point>> Figure::randGen()
 
 	case 4:
 	{
+		this->m_Color = FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY;
 		return { { Point(0,0), Point(1,0), Point(0,1), Point(1,1) }, }; // O
 	}
 	break;
 
 	case 5:
 	{
+		this->m_Color = FOREGROUND_GREEN;
 		return { { Point(0,0), Point(1,0), Point(1,1), Point(2,1) },  // Z
 				 { Point(0,0), Point(0,1), Point(-1,1), Point(-1,2) }, };
 	}
@@ -133,6 +139,7 @@ vector<vector<Point>> Figure::randGen()
 
 	case 6:
 	{
+		this->m_Color = FOREGROUND_RED;
 		return { { Point(0,0), Point(1,0), Point(-1,1), Point(0,1) },  // S
 				 { Point(0,0), Point(0,1), Point(1,1), Point(1,2) }, };
 	}
